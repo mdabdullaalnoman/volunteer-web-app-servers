@@ -22,27 +22,19 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 client.connect(err => {
     const VolunteerCollection = client.db("Volunteer-Web-App").collection("volunteer");
     const FormCollection = client.db("Volunteer-Web-App").collection("fromData");
-    const NewCollection = client.db("Volunteer-Web-App").collection("newVol");
+
  // ------------- Volunteer Card Data -------------
  
     // app.post("/volunteerCard", (req, res) => {
     //     const volunteer = req.body;
-    //     VolunteerCollection.insertOne(volunteer)
+    //     VolunteerCollection.insertMany(volunteer)
     //         .then(result => {
     //             console.log(result);
     //         })
     // });
 
-    app.post("/volunteerCard", (req, res) => {
-        const volunteer = req.body;
-        NewCollection.insertOne(volunteer)
-            .then(result => {
-                console.log(result);
-            })
-    });
-
     app.get('/volunteerCards' , (req , res) => {
-        VolunteerCollection.find({email: req.query.email})
+        VolunteerCollection.find({})
         .toArray((err , documents) => {
             res.json(documents);
         })
