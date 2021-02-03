@@ -1,9 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const port = 5000;
+const port = process.env.PORT || 5000;
 require('dotenv').config()
-console.log();
+
 
 const MongoClient = require('mongodb').MongoClient;
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.bdvqy.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`; 
@@ -76,6 +76,9 @@ app.delete('/delete/:id' , (req,res) =>{
    })
 });
 
+app.listen( port,()=>console.log(`connected database server${port}`));
+
+// app.listen( process.env.port || port);
 
 
-app.listen( process.env.port || port);
+
